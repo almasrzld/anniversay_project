@@ -71,7 +71,7 @@ const HeroSection = () => {
             </p>
             <div className="flex flex-col items-center">
               <p className="text-red-600 font-light lg:text-xs md:text-sm sm:text-xs text-[7.5px]">
-                " 1 Year "
+                " 2 Year "
               </p>
               <p className="text-red-600 font-bold lg:text-xs md:text-sm sm:text-xs text-[7.5px]">
                 MUHAMMAD ALMAS RIZALDI
