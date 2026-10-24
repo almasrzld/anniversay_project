@@ -8,12 +8,12 @@ function AboutSection() {
     offset: ["start end", "end start"],
   });
 
-  const x1 = useTransform(scrollYProgress, [0, 1], ["40%", "-40%"]);
-  const x2 = useTransform(scrollYProgress, [0, 1], ["-50%", "20%"]);
+  const x1 = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
+  const x2 = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
   const skewY = useTransform(
     scrollYProgress,
     [0, 0.5, 1],
-    ["8deg", "0deg", "-8deg"]
+    ["5deg", "0deg", "-5deg"],
   );
 
   return (
@@ -33,27 +33,29 @@ function AboutSection() {
         </p>
       </div>
 
-      <div className="absolute top-[35%] left-0 w-full flex flex-col items-center space-y-[-60px] pointer-events-none">
+      <div className="absolute top-[35%] left-0 w-full flex flex-col items-center space-y-[-9px] sm:space-y-[-14px] md:space-y-[-18px] pointer-events-none">
         <motion.div
-          className="text-red-600 text-[310px] font-extrabold font-anton leading-none whitespace-nowrap"
+          className="text-red-600 text-[clamp(160px,18vw,280px)] font-extrabold font-anton leading-none whitespace-nowrap"
           style={{
             x: x1,
             skewY: skewY,
-            letterSpacing: "-0.05em",
+            letterSpacing: "0.02em",
+            willChange: "transform",
           }}
         >
           ALMAS • SEPTIANA
         </motion.div>
 
         <motion.div
-          className="text-red-600 text-[310px] font-extrabold font-anton leading-none whitespace-nowrap"
+          className="text-red-600 text-[clamp(160px,18vw,280px)] font-extrabold font-anton leading-none whitespace-nowrap"
           style={{
             x: x2,
             skewY: skewY,
-            letterSpacing: "-0.05em",
+            letterSpacing: "0.02em",
+            willChange: "transform",
           }}
         >
-          OUR MOMENT • 2023 - 2025
+          OUR MOMENT • 2023 - 2026
         </motion.div>
       </div>
     </section>

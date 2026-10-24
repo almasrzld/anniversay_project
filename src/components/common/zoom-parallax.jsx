@@ -16,10 +16,10 @@ const ZoomParallaxSection = () => {
   });
 
   const scale4 = useTransform(scrollYProgress, [0, 1], [1, 4]);
-  const scale5 = useTransform(scrollYProgress, [0, 1], [1, 5]);
-  const scale6 = useTransform(scrollYProgress, [0, 1], [1, 6]);
-  const scale8 = useTransform(scrollYProgress, [0, 1], [1, 8]);
-  const scale9 = useTransform(scrollYProgress, [0, 1], [1, 9]);
+  const scale5 = useTransform(scrollYProgress, [0, 1], [1, 4.5]);
+  const scale6 = useTransform(scrollYProgress, [0, 1], [1, 5]);
+  const scale8 = useTransform(scrollYProgress, [0, 1], [1, 5.5]);
+  const scale9 = useTransform(scrollYProgress, [0, 1], [1, 6]);
 
   const pictures = [
     {
@@ -63,26 +63,33 @@ const ZoomParallaxSection = () => {
   ];
 
   return (
-    <div ref={container} className="relative h-[300vh]">
-      <div className="sticky top-0 h-screen overflow-hidden">
+    <div ref={container} className="relative h-[300vh] bg-red-100">
+      <div className="sticky top-0 h-screen overflow-hidden bg-red-100">
         {pictures.map(({ src, scale }, index) => (
           <motion.div
             key={index}
-            style={{ scale }}
-            className="absolute inset-0 flex items-center justify-center"
+            style={{
+              scale,
+              willChange: "transform",
+            }}
+            className="absolute inset-0 flex items-center justify-center pointer-events-none transform-gpu"
           >
             <div
-              className="relative"
+              className="relative overflow-hidden transform-gpu"
               style={{
                 top: positions[index].top,
                 left: positions[index].left,
                 width: positions[index].w,
                 height: positions[index].h,
+                backfaceVisibility: "hidden",
+                WebkitBackfaceVisibility: "hidden",
               }}
             >
               <img
                 src={src}
                 alt={`image-${index + 1}`}
+                decoding="async"
+                loading="eager"
                 className="w-full h-full object-cover"
               />
             </div>
