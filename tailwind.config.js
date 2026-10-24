@@ -7,6 +7,7 @@ export default {
         sans: ["Inter", "sans-serif"],
         anton: ["Anton", "Anton Placeholder", "sans-serif"],
         francois: ["Francois One", "Francois One Placeholder", "sans-serif"],
+        serif: ["Playfair Display", "Georgia", "serif"],
       },
       container: {
         center: true,
