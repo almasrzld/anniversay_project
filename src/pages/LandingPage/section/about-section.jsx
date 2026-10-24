@@ -1,61 +1,61 @@
-import { motion, useMotionValue, useTransform } from "framer-motion";
-import { useEffect } from "react";
-import { debounce } from "lodash";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 function AboutSection() {
-  const y = useMotionValue(0);
-  const x1 = useTransform(y, [3000, 1000], [500, -120]);
-  const x2 = useTransform(y, [3000, 1000], [-1000, 120]);
-  const skewY = useTransform(y, [3000, 2000, 500], [8, 0, -8]);
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
 
-  useEffect(() => {
-    const handleScroll = debounce(() => {
-      y.set(window.scrollY);
-    }, 10);
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [y]);
+  const x1 = useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]);
+  const x2 = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+  const skewY = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    ["5deg", "0deg", "-5deg"],
+  );
 
   return (
-    <section className="w-full h-full bg-red-100">
-      <div className="container pt-24">
-        <h1 className="text-red-600 font-semibold text-xs font-francois">
+    <section
+      ref={ref}
+      className="relative min-h-[150vh] bg-red-100 overflow-hidden"
+    >
+      <div className="container pt-24 relative z-10">
+        <h1 className="text-red-600 font-extrabold text-xs font-francois tracking-wide uppercase">
           ABOUT US
         </h1>
-        <p className="text-red-600 text-lg max-w-[345px] pt-4 font-medium">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores,
-          harum provident at ex sit blanditiis similique fugiat ipsam
-          necessitatibus minus cumque esse veritatis porro facilis.
+        <p className="text-red-600 text-lg max-w-[400px] pt-3 font-medium tracking-normal leading-[1.2em]">
+          Kami adalah dua jiwa yang dipertemukan oleh waktu dan perjalanan. Dari
+          pertemuan pertama hingga hari ini, setiap detik bersama adalah
+          anugerah, tawa, doa, dan cerita yang menjadikan cinta ini tumbuh lebih
+          dalam.
         </p>
       </div>
-      <div className="flex flex-col items-center space-y-[-65px] shrink-0 overflow-hidden py-40">
+
+      <div className="absolute top-[35%] left-0 w-full flex flex-col items-center space-y-[-9px] sm:space-y-[-14px] md:space-y-[-18px] pointer-events-none">
         <motion.div
-          className="text-red-600 text-[350px] font-bold font-anton leading-none whitespace-nowrap"
+          className="text-red-600 text-[clamp(160px,18vw,280px)] font-extrabold font-anton leading-none whitespace-nowrap"
           style={{
             x: x1,
             skewY: skewY,
-            perspective: 1200,
+            letterSpacing: "0.02em",
             willChange: "transform",
-            letterSpacing: "-20px",
           }}
         >
-          <p>ALMAS • SEPTIANA</p>
+          ALMAS • SEPTIANA
         </motion.div>
+
         <motion.div
-          className="text-red-600 text-[350px] font-bold font-anton leading-none whitespace-nowrap"
+          className="text-red-600 text-[clamp(160px,18vw,280px)] font-extrabold font-anton leading-none whitespace-nowrap"
           style={{
             x: x2,
             skewY: skewY,
-            perspective: 1200,
+            letterSpacing: "0.02em",
             willChange: "transform",
-            letterSpacing: "-20px",
           }}
         >
-          <p>OUR MOMENT • 2023 - 2024</p>
+          OUR MOMENT • 2023 - 2026
         </motion.div>
       </div>
     </section>
