@@ -751,15 +751,15 @@ const LetterSection = () => {
             y: sunsetTitleY,
             willChange: "transform, opacity",
           }}
-          className="container max-w-2xl text-center absolute top-[25%] sm:top-[28%] left-1/2 -translate-x-1/2 z-25 pointer-events-none transform-gpu px-4"
+          className="absolute inset-x-0 top-[25%] sm:top-[28%] mx-auto w-full max-w-2xl px-4 text-center z-25 pointer-events-none transform-gpu"
         >
-          <div className="inline-flex items-center gap-2 bg-amber-950/40 backdrop-blur-xs border border-amber-400/30 px-3.5 py-1 rounded-full mb-3">
+          <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-2 bg-amber-950/40 backdrop-blur-xs border border-amber-400/30 px-3.5 py-1 rounded-full mb-3">
             <span className="font-francois text-amber-300 text-[11px] sm:text-xs tracking-widest uppercase">
               SENJA BERSAMAMU • DUSK TO NIGHT
             </span>
             <FaHeart className="w-2.5 h-2.5 text-amber-400" />
           </div>
-          <h3 className="font-anton text-3xl sm:text-5xl md:text-6xl text-white tracking-tight uppercase drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]">
+          <h3 className="font-anton text-2xl leading-tight sm:text-5xl md:text-6xl text-white tracking-tight uppercase drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]">
             SAAT MATAHARI TERBENAM
           </h3>
           <p className="font-serif italic text-amber-100/90 text-xs sm:text-sm md:text-base mt-2.5 max-w-lg mx-auto drop-shadow-md">
