@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
-import Hero1 from "@/assets/images/hero1.jpg";
+import Hero1 from "@/assets/images/hero-couple.jpeg";
 import Hero2 from "@/assets/images/hero2.jpg";
 import Hero3 from "@/assets/images/hero3.jpg";
 import Hero4 from "@/assets/images/hero4.jpg";
@@ -10,6 +10,10 @@ const HeroSection = () => {
   const imageUrls = [Hero1, Hero2, Hero3, Hero4, Hero5];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" &&
+    window.matchMedia("(max-width: 639px)").matches,
+  );
 
   const handleClick = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageUrls.length);
@@ -18,7 +22,7 @@ const HeroSection = () => {
   const y = useMotionValue(0);
   const x = useMotionValue(0);
   const perspective = useTransform(y, [0, 1000], [1200, 1200]);
-  const scaleIMG = useTransform(y, [0, 1000], [1.29, 1]);
+  const scaleIMG = useTransform(y, [0, 1000], isMobile ? [1, 1] : [1.29, 1]);
   const topY = useTransform(y, [0, 1000], [0, -600]);
   const topX = useTransform(x, [0, 1000], [0, 0]);
   const bottomY = useTransform(y, [0, 1000], [0, 600]);
@@ -36,14 +40,28 @@ const HeroSection = () => {
     };
   }, [y]);
 
+  useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 639px)");
+    const updateMobileState = () => setIsMobile(mobileQuery.matches);
+
+    updateMobileState();
+    mobileQuery.addEventListener("change", updateMobileState);
+
+    return () => mobileQuery.removeEventListener("change", updateMobileState);
+  }, []);
+
   return (
     <section className="relative h-[250vh]">
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         <motion.img
           src={imageUrls[currentImageIndex]}
           onClick={handleClick}
-          alt="Hero"
-          className="object-cover w-full h-full cursor-pointer"
+          alt="Almas dan Septiana bersama"
+          className={`object-cover w-full h-full cursor-pointer ${
+            currentImageIndex === 0
+              ? "object-[35%_center] sm:object-center"
+              : "object-center"
+          }`}
           style={{ scale: scaleIMG }}
         />
         <motion.div
